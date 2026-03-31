@@ -2,248 +2,248 @@ const aiboColor = '#0B7285';
 
 Blockly.Blocks['import_aibo_web_api'] = {
   init: function() {
-    this.appendDummyInput().appendField('import Aibo Web API helper');
+    this.appendDummyInput().appendField('get Aibo ready');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Import the AiboWebApi class into your Python program.');
+    this.setTooltip('Get the Aibo helper ready so your code can talk to Aibo.');
   },
 };
 
 Blockly.Blocks['aibo_client_init'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('create Aibo client')
+      .appendField('make Aibo link')
       .appendField(new Blockly.FieldVariable('aibo'), 'client')
-      .appendField('with base URL');
+      .appendField('with website');
     this.appendValueInput('BASE_URL').setCheck(null);
-    this.appendDummyInput().appendField('and API key');
+    this.appendDummyInput().appendField('and secret key');
     this.appendValueInput('API_KEY').setCheck(null);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Create a reusable client connection for Aibo web requests.');
+    this.setTooltip('Make a link so your code can send messages to Aibo.');
   },
 };
 
 Blockly.Blocks['aibo_get_request'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('result of GET request from client')
+      .appendField('what Aibo says back from')
       .appendField(new Blockly.FieldVariable('aibo'), 'client')
-      .appendField('to path');
+      .appendField('page');
     this.appendValueInput('PATH').setCheck(null);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Send a GET request and store the response dictionary.');
+    this.setTooltip('Ask Aibo for information from one page.');
   },
 };
 
 Blockly.Blocks['aibo_post_request'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('result of POST request from client')
+      .appendField('what happens when')
       .appendField(new Blockly.FieldVariable('aibo'), 'client')
-      .appendField('to path');
+      .appendField('sends to page');
     this.appendValueInput('PATH').setCheck(null);
-    this.appendDummyInput().appendField('with data');
+    this.appendDummyInput().appendField('with this');
     this.appendValueInput('PAYLOAD').setCheck(null);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Send a POST request with JSON data and store the response.');
+    this.setTooltip('Send some information to Aibo and save the answer.');
   },
 };
 
 Blockly.Blocks['aibo_actions_list'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('available actions from client')
+      .appendField('things Aibo can do from')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Get the list of actions that Aibo supports.');
+    this.setTooltip('See all the things Aibo knows how to do.');
   },
 };
 
 Blockly.Blocks['aibo_actions_get'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('details for action');
+      .appendField('about action');
     this.appendValueInput('ACTION').setCheck(null);
     this.appendDummyInput()
-      .appendField('from client')
+      .appendField('from')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Get information about a specific action by name.');
+    this.setTooltip('Learn more about one thing Aibo can do.');
   },
 };
 
 Blockly.Blocks['aibo_actions_trigger'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('run action');
+      .appendField('make Aibo do');
     this.appendValueInput('ACTION').setCheck(null);
-    this.appendDummyInput().appendField('with data');
+    this.appendDummyInput().appendField('using');
     this.appendValueInput('PAYLOAD').setCheck(null);
     this.appendDummyInput()
-      .appendField('using client')
+      .appendField('with')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Trigger an action and pass optional JSON payload data.');
+    this.setTooltip('Tell Aibo to do something.');
   },
 };
 
 Blockly.Blocks['aibo_say'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('ask Aibo to say');
+      .appendField('make Aibo say');
     this.appendValueInput('TEXT').setCheck(null);
     this.appendDummyInput()
-      .appendField('using client')
+      .appendField('with')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Use the actions API to make Aibo speak text.');
+    this.setTooltip('Make Aibo speak some words.');
   },
 };
 
 Blockly.Blocks['aibo_settings_get_all'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('all settings from client')
+      .appendField('all Aibo settings from')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Get the full settings object from Aibo.');
+    this.setTooltip('See all of Aibo’s settings.');
   },
 };
 
 Blockly.Blocks['aibo_settings_get_key'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('setting value for key');
+      .appendField('setting called');
     this.appendValueInput('KEY').setCheck(null);
     this.appendDummyInput()
-      .appendField('from client')
+      .appendField('from')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Read one setting by key, such as volume or brightness.');
+    this.setTooltip('See one setting, like volume.');
   },
 };
 
 Blockly.Blocks['aibo_settings_set_key'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('set setting key');
+      .appendField('change setting');
     this.appendValueInput('KEY').setCheck(null);
-    this.appendDummyInput().appendField('to value');
+    this.appendDummyInput().appendField('to');
     this.appendValueInput('VALUE').setCheck(null);
     this.appendDummyInput()
-      .appendField('using client')
+      .appendField('with')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Set one setting value on Aibo.');
+    this.setTooltip('Change one Aibo setting.');
   },
 };
 
 Blockly.Blocks['aibo_settings_update'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('update multiple settings with data');
+      .appendField('change many settings with');
     this.appendValueInput('SETTINGS').setCheck(null);
     this.appendDummyInput()
-      .appendField('using client')
+      .appendField('with')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Update several settings at once using a JSON object.');
+    this.setTooltip('Change lots of Aibo settings at once.');
   },
 };
 
 Blockly.Blocks['aibo_events_list'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('recent events from client')
+      .appendField('new things that happened from')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Get the current list of events.');
+    this.setTooltip('See what just happened.');
   },
 };
 
 Blockly.Blocks['aibo_events_since'] = {
   init: function() {
     this.appendDummyInput()
-      .appendField('store in')
+      .appendField('save in')
       .appendField(new Blockly.FieldVariable('response'), 'response')
-      .appendField('events since cursor');
+      .appendField('things that happened after');
     this.appendValueInput('SINCE').setCheck(null);
     this.appendDummyInput()
-      .appendField('from client')
+      .appendField('from')
       .appendField(new Blockly.FieldVariable('aibo'), 'client');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Get new events after a cursor or event marker.');
+    this.setTooltip('See what happened after a saved point.');
   },
 };
 
 Blockly.Blocks['aibo_response_value'] = {
   init: function() {
-    this.appendDummyInput().appendField('read from response');
+    this.appendDummyInput().appendField('from answer');
     this.appendValueInput('RESPONSE').setCheck(null);
-    this.appendDummyInput().appendField('the value for key');
+    this.appendDummyInput().appendField('get');
     this.appendValueInput('KEY').setCheck(null);
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(aiboColor);
-    this.setTooltip('Read one value from a response dictionary by key.');
+    this.setTooltip('Pick one thing out of Aibo’s answer.');
   },
 };
