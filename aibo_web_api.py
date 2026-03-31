@@ -1,12 +1,12 @@
 """Python helper for EduBlocks Aibo Web API extension.
 
-This module intentionally stays runtime-agnostic for EduBlocks Python mode.
-It uses only Python standard library HTTP clients.
+This module is runtime-agnostic for EduBlocks Python mode and uses the
+Python standard library for HTTP calls.
 """
 
 import json
 from typing import Any, Dict, Optional
-from urllib import request, error
+from urllib import error, parse, request
 
 
 class AiboWebApi:
@@ -15,6 +15,11 @@ class AiboWebApi:
         self.api_key = api_key
         self.timeout = timeout
         self.verify_ssl = verify_ssl
+
+        # Endpoint roots for common Aibo-style bridge APIs.
+        self.actions_api = '/api/actions'
+        self.settings_api = '/api/settings'
+        self.events_api = '/api/events'
 
     def _make_url(self, path: str) -> str:
         if not path.startswith('/'):
@@ -64,7 +69,11 @@ class AiboWebApi:
         except error.URLError as exc:
             return {'status': 0, 'ok': False, 'error': str(exc.reason)}
 
-    def get(self, path: str) -> Dict[str, Any]:
+    def get(self, path: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        if params:
+            query = parse.urlencode(params)
+            separator = '&' if '?' in path else '?'
+            path = f'{path}{separator}{query}'
         return self._request('GET', path)
 
     def post(self, path: str, payload: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -73,12 +82,41 @@ class AiboWebApi:
     def put(self, path: str, payload: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         return self._request('PUT', path, payload)
 
+    def patch(self, path: str, payload: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        return self._request('PATCH', path, payload)
+
     def delete(self, path: str) -> Dict[str, Any]:
         return self._request('DELETE', path)
 
-    # Convenience wrappers for commonly used action patterns.
-    def say(self, text: str) -> Dict[str, Any]:
-        return self.post('/api/actions/say', {'text': text})
+    # Actions API
+    def actions_list(self) -> Dict[str, Any]:
+        return self.get(self.actions_api)
 
-    def perform_action(self, action: str) -> Dict[str, Any]:
-        return self.post('/api/actions/' + action, {})
+    def actions_get(self, action: str) -> Dict[str, Any]:
+        return self.get(f'{self.actions_api}/{action}')
+
+    def actions_trigger(self, action: str, payload: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        return self.post(f'{self.actions_api}/{action}', payload or {})
+
+    def say(self, text: str) -> Dict[str, Any]:
+        return self.actions_trigger('say', {'text': text})
+
+    # Settings API
+    def settings_get_all(self) -> Dict[str, Any]:
+        return self.get(self.settings_api)
+
+    def settings_get(self, key: str) -> Dict[str, Any]:
+        return self.get(f'{self.settings_api}/{key}')
+
+    def settings_set(self, key: str, value: Any) -> Dict[str, Any]:
+        return self.put(f'{self.settings_api}/{key}', {'value': value})
+
+    def settings_update(self, values: Dict[str, Any]) -> Dict[str, Any]:
+        return self.patch(self.settings_api, values)
+
+    # Events API
+    def events_list(self) -> Dict[str, Any]:
+        return self.get(self.events_api)
+
+    def events_since(self, since: str) -> Dict[str, Any]:
+        return self.get(self.events_api, {'since': since})

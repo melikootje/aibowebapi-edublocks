@@ -16,6 +16,8 @@
     </value>
   </block>
 
+  <label text="Core HTTP"></label>
+
   <block type="aibo_get_request">
     <value name="PATH">
       <shadow type="inline_string">
@@ -37,6 +39,31 @@
     </value>
   </block>
 
+  <label text="Actions API"></label>
+
+  <block type="aibo_actions_list"></block>
+
+  <block type="aibo_actions_get">
+    <value name="ACTION">
+      <shadow type="inline_string">
+        <field name="value">sit_down</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_actions_trigger">
+    <value name="ACTION">
+      <shadow type="inline_string">
+        <field name="value">sit_down</field>
+      </shadow>
+    </value>
+    <value name="PAYLOAD">
+      <shadow type="inline_text">
+        <field name="value">{}</field>
+      </shadow>
+    </value>
+  </block>
+
   <block type="aibo_say">
     <value name="TEXT">
       <shadow type="inline_string">
@@ -45,10 +72,47 @@
     </value>
   </block>
 
-  <block type="aibo_perform_action">
-    <value name="ACTION">
+  <label text="Settings API"></label>
+
+  <block type="aibo_settings_get_all"></block>
+
+  <block type="aibo_settings_get_key">
+    <value name="KEY">
       <shadow type="inline_string">
-        <field name="value">sit_down</field>
+        <field name="value">volume</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_settings_set_key">
+    <value name="KEY">
+      <shadow type="inline_string">
+        <field name="value">volume</field>
+      </shadow>
+    </value>
+    <value name="VALUE">
+      <shadow type="inline_text">
+        <field name="value">8</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_settings_update">
+    <value name="SETTINGS">
+      <shadow type="inline_text">
+        <field name="value">{"volume": 8, "eye_brightness": 50}</field>
+      </shadow>
+    </value>
+  </block>
+
+  <label text="Events API"></label>
+
+  <block type="aibo_events_list"></block>
+
+  <block type="aibo_events_since">
+    <value name="SINCE">
+      <shadow type="inline_string">
+        <field name="value">cursor_123</field>
       </shadow>
     </value>
   </block>
