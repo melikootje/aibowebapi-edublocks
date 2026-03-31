@@ -1,4 +1,11 @@
 {
+  "config": {
+    "mode": "python",
+    "code": [
+      "aibo_web_api.py"
+    ],
+    "interpreter": "py"
+  },
   "mode": "python",
   "code": [
     "aibo_web_api.py"
