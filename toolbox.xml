@@ -1,0 +1,68 @@
+<category name="Aibo Web API" colour="#0B7285" css-icon="customIcon fad fa-robot">
+  <label text="Aibo Web API"></label>
+
+  <block type="import_aibo_web_api"></block>
+
+  <block type="aibo_client_init">
+    <value name="BASE_URL">
+      <shadow type="inline_string">
+        <field name="value">http://127.0.0.1:8080</field>
+      </shadow>
+    </value>
+    <value name="API_KEY">
+      <shadow type="inline_string">
+        <field name="value">your_api_key</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_get_request">
+    <value name="PATH">
+      <shadow type="inline_string">
+        <field name="value">/api/status</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_post_request">
+    <value name="PATH">
+      <shadow type="inline_string">
+        <field name="value">/api/actions/say</field>
+      </shadow>
+    </value>
+    <value name="PAYLOAD">
+      <shadow type="inline_text">
+        <field name="value">{"text": "Hello from EduBlocks"}</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_say">
+    <value name="TEXT">
+      <shadow type="inline_string">
+        <field name="value">Hello buddy</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_perform_action">
+    <value name="ACTION">
+      <shadow type="inline_string">
+        <field name="value">sit_down</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="aibo_response_value">
+    <value name="RESPONSE">
+      <block type="variable_get">
+        <field name="variable_name">response</field>
+      </block>
+    </value>
+    <value name="KEY">
+      <shadow type="inline_string">
+        <field name="value">ok</field>
+      </shadow>
+    </value>
+  </block>
+</category>
